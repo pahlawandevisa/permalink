@@ -1,9 +1,9 @@
 <?php
 
-if (! function_exists('str_permalink')) {
+if (! function_exists('permalink')) {
 
-    function str_permalink($title, $separator = '-')
+    function permalink($title, $separator = '-', $dropExtension = true)
     {
-        return \Privateer\Permalink\Permalink::permalink($title, $separator);
+        return \Privateer\Permalink\Permalink::permalink($title, $separator, $dropExtension);
     }
 }

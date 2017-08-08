@@ -5,9 +5,14 @@ namespace Privateer\Permalink;
 
 class Permalink
 {
-    public static function permalink($title, $separator = '-')
+    public static function permalink($title, $separator = '-', $dropExtension = true)
     {
         $title = static::ascii($title);
+
+        if($dropExtension)
+        {
+            $title = static::dropExtension($title);
+        }
 
         // Convert all dashes/underscores into separator
         $flip = $separator == '-' ? '_' : '-';
@@ -15,13 +20,25 @@ class Permalink
         $title = preg_replace('!['.preg_quote($flip).']+!u', $separator, $title);
 
         // Remove all characters that are not the separator, letters, numbers, or whitespace.
-        $title = preg_replace('![^'.preg_quote($separator).'\pL\pN\s]+!u', '', mb_strtolower($title));
+        $title = preg_replace('![^'.preg_quote($separator).'\pL\pN/\s]+!u', '', mb_strtolower($title));
 
         // Replace all separator characters and whitespace by a single separator
         $title = preg_replace('!['.preg_quote($separator).'\s]+!u', $separator, $title);
 
         return trim($title, $separator);
     }
+
+    public static function dropExtension($value)
+    {
+        $path = explode('/', $value);
+
+        $parts = explode('.', array_pop($path));
+
+        array_pop($parts);
+
+        return trim(implode('/', $path) . '/' . implode('.', $parts), '/');
+    }
+
 
     public static function ascii($value)
     {
