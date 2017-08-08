@@ -1,0 +1,29 @@
+{
+  "name": "theprivateer/permalink",
+  "description": "Simple utility for creating URL friendly 'slugs'",
+
+  "authors" : [{
+    "name" : "Phil Stephens",
+    "email" : "emailtheprivateer@gmail.com"
+  }
+  ],
+  "keywords" : [
+    "Permalink", "Slug", "URI"
+  ],
+  "homepage" : "https://github.com/theprivateer/permalink",
+  "license" : [
+    "MIT"
+  ],
+
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Privateer\\Permalink\\": "src/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+  }
+}
